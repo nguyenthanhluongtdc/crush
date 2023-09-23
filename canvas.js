@@ -1,11 +1,12 @@
+var window 
 const canvas = document.getElementById('fireworks');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth * window.devicePixelRatio;
-canvas.height = window.innerHeight * window.devicePixelRatio;
+canvas.width = window.innerWidth * 1;
+canvas.height = window.innerHeight * 1;
 canvas.style.width = `${window.innerWidth}px`;
 canvas.style.height = `${window.innerHeight}px`;
 
-ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+ctx.scale(1, 1);
 
 var mouse = {
     x: 0,
@@ -36,11 +37,11 @@ class Firework {
         // Draw the rocket
         if (this.counter < 80) {
             ctx.beginPath();
-            ctx.arc(this.x, canvas.height/window.devicePixelRatio - this.counter * 2, 0, 0, 2);
+            ctx.arc(this.x, canvas.height/1 - this.counter * 2, 0, 0, 2);
             ctx.fillStyle = `rgb(${this.color.r}, ${this.color.g}, ${this.color.b})`;
             ctx.fill();
 
-            this.trail.push({x: this.x, y: canvas.height/window.devicePixelRatio - this.counter * 5});
+            this.trail.push({x: this.x, y: canvas.height/1 - this.counter * 5});
 
             // Draw the trail
             ctx.beginPath();
@@ -61,7 +62,7 @@ class Firework {
         // Explode the firework
         else if (this.sparks.length === 0) {
             for (let i = 0; i < 70; i++) { // increase the number of sparks
-                this.sparks.push(new Spark(this.x, canvas.height/window.devicePixelRatio - this.counter * 5, this.color));
+                this.sparks.push(new Spark(this.x, canvas.height/1 - this.counter * 5, this.color));
             }
         }
 
@@ -121,9 +122,9 @@ class Spark {
 let fireworks = [];
 
 setInterval(function () {
-    let x = Math.random() * canvas.width/window.devicePixelRatio;
+    let x = Math.random() * canvas.width/1;
     let color = colors[Math.floor(Math.random() * colors.length)];
-    fireworks.push(new Firework(x, canvas.height/window.devicePixelRatio, color));
+    fireworks.push(new Firework(x, canvas.height/1, color));
 }, 1000);
 
 
@@ -133,7 +134,7 @@ setInterval(function () {
 w = canvas.width;
 h = canvas.height;
 
-ctx.font = "normal 3em Brush Script MT, cursive";
+ctx.font = "normal 1.2em Brush Script MT, cursive";
 ctx.textAlign = "center";
 ctx.fillText("KHÁNH LINH", canvas.width / 4, canvas.height / 3.9);
 var radius = 1;
@@ -243,7 +244,7 @@ initScene();
 
 
 function animate() {
-    ctx.clearRect(0, 0, canvas.width/window.devicePixelRatio, canvas.height/window.devicePixelRatio);
+    ctx.clearRect(0, 0, canvas.width/1, canvas.height/1);
     
     for (let i = 0; i < fireworks.length; i++) {
         fireworks[i].draw();
@@ -256,7 +257,7 @@ function animate() {
     ctx.font = `bold ${fontSize}px Open Sans`;
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
-    ctx.fillText("", canvas.width/2/window.devicePixelRatio, canvas.height/2/window.devicePixelRatio - 100);
+    ctx.fillText("", canvas.width/2/1, canvas.height/2/1 - 100);
 
     for (var i = 0; i < txtArr.length; i++) {
         circleArr[i].render();
